@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 
-from tecton import batch_feature_view, Aggregation
+from tecton import batch_feature_view, Aggregation, RiftBatchConfig
 from tecton.types import Field, String, Timestamp, Float64
 
 from entities import requester_entity
@@ -35,6 +35,7 @@ from data_sources.orders_snowflake_batch_source import orders_batch_source
     online=True,
     offline=True,
     feature_start_time=datetime(2024, 1, 1),
+    batch_compute=RiftBatchConfig(),
     tags={
         "use_case": "Ride Hire",
         "environment": "development"

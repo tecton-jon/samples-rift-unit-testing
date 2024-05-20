@@ -19,8 +19,6 @@ def snowflake_connection():
     }
     conn = snowflake.connector.connect(**connection_parameters)
     tecton.snowflake_context.set_connection(conn)
-    tecton.set_validation_mode('auto')
-    tecton.conf.set("TECTON_OFFLINE_RETRIEVAL_COMPUTE_MODE", "rift")
     yield conn
     conn.close()
 
@@ -46,9 +44,11 @@ def sample_orders_data():
 
 @pytest.mark.usefixtures("snowflake_connection")
 def test_get_dataframe(sample_orders_data):
-    start = datetime(2024, 4, 1, 8)
-    end = datetime(2024, 4, 3, 10, 0, 1)
+    # Validate is required and must set TECTON_BATCH_COMPUTE_MODE=rift
     tecton.conf.set("TECTON_BATCH_COMPUTE_MODE", "rift")
     orders_batch_source.validate()
+
+    start = datetime(2024, 4, 1, 8)
+    end = datetime(2024, 4, 3, 10, 0, 1)
     df = orders_batch_source.get_dataframe(start_time=start, end_time=end, compute_mode="rift").to_pandas()
     pd.testing.assert_frame_equal(df, sample_orders_data)
