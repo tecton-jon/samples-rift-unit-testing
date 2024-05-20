@@ -1,0 +1,29 @@
+{
+  "order_id": "ORD123456",
+  "requester": {
+    "requester_id": "REQ78910",
+    "requester_rating": 4.5
+  },
+  "driver": {
+    "driver_id": "DRV456789",
+    "driver_rating": 4.8,
+    "driver_status": "available"
+  },
+  "order_details": {
+    "pickup_location": {
+      "latitude": 34.0522,
+      "longitude": -118.2437
+    },
+    "dropoff_location": {
+      "latitude": 36.7783,
+      "longitude": -119.4179
+    },
+    "cargo_size": "medium"
+  },
+  "payment": {
+    "method": "credit_card",
+    "amount": 150.00
+  },
+  "order_created": "2024-04-29T12:00:00Z",
+  "vehicle_type": "closed_truck"
+}
